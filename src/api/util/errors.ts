@@ -1,4 +1,5 @@
 import { ErrorRequestHandler } from 'express';
+import logger from '../../config/logger';
 
 class ServerError extends Error {
   public code: number = 500;
@@ -11,8 +12,12 @@ class ServerError extends Error {
   }
 
   static middleware(): ErrorRequestHandler {
-    return (err: ServerError, _, res, __) => {
-      res.status(err.code).json({ message: err.message, code: err.code });
+    return async (err: ServerError, _, res, __) => {
+      try {
+        res.status(err.code).json({ message: err.message, code: err.code });
+      } catch (err) {
+        logger.error(err.message);
+      }
     };
   }
 }

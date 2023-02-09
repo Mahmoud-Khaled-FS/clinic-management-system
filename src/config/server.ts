@@ -19,7 +19,7 @@ class Server {
   }
 
   setupApiRouters(apiRouters: ApiRouters) {
-    this.app.use('/api', apiRouters.router);
+    this.app.use(apiRouters.router);
     this.app.use(ServerError.middleware());
     this.app.use(notFoundMiddleware);
   }
