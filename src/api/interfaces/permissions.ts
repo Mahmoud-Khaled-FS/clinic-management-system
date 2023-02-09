@@ -52,15 +52,3 @@ export const employeeDefaultPremission: RolePremission = {
   reports: 'none',
   invoice: 'none',
 };
-// export const patientDefaultPremission: RolePremission = {
-//   apppointment: 'none',
-//   doctors: 'none',
-//   patient: 'r',
-//   medicine: 'r',
-//   clinic: 'r',
-//   prescription: 'none',
-//   employee: 'none',
-//   permissions: 'none',
-//   reports: 'none',
-//   invoice: 'none',
-// };

@@ -1,7 +1,4 @@
-// import { config } from 'dotenv';
-// import server from './config/server';
-// config();
+import '../src/config/env';
+import server from './config/server';
 
-// server.launch();
-
-console.log(new Date().getTime());
+server.launch();

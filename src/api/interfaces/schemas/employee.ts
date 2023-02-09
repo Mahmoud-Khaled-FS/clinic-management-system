@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Document, PopulatedDoc, Schema } from 'mongoose';
 import { Gender } from '../common';
 import { RolePremission, UserRole } from '../permissions';
 
@@ -19,7 +19,7 @@ interface EmployeeInfo {
   hrsPerDay: number;
   picture: string;
   phoneNumber: string;
-  salary: string;
+  salary: number;
   jopTitle: string;
   role: UserRole;
   premissions: RolePremission;
@@ -30,7 +30,7 @@ interface NonDoctor extends EmployeeInfo {
 
 interface Doctor extends EmployeeInfo {
   isDoctor: true;
-  profileId: Schema.Types.ObjectId;
+  profileId: PopulatedDoc<Document<Schema.Types.ObjectId> & DoctorProfileSchema>;
 }
 export type EmployeeSchema = Doctor | NonDoctor;
 

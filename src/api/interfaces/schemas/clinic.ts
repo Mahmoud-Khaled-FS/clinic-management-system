@@ -1,12 +1,13 @@
-import { Schema } from 'mongoose';
+import { Document, PopulatedDoc, Schema } from 'mongoose';
+import { EmployeeSchema } from './employee';
 
 export interface ClinicSchema {
   name: string;
-  doctorsId: Schema.Types.ObjectId[];
-  services: Schema.Types.ObjectId[];
+  doctorsId: PopulatedDoc<Document<Schema.Types.ObjectId> & EmployeeSchema>[];
+  services: ClinicServices[];
 }
 
-export interface ClinicServicesSchema {
+export interface ClinicServices {
   name: string;
   description: string;
   price?: number;

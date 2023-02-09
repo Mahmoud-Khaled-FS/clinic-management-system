@@ -1,16 +1,17 @@
-import { Schema } from 'mongoose';
+import { Document, PopulatedDoc, Schema } from 'mongoose';
 import { Gender } from '../common';
+import { EmployeeSchema } from './employee';
 
 export interface PatientSchema {
-  firstName: string;
-  lastName: string;
-  age: number;
-  address: string;
-  phoneNumber: string;
-  gender: Gender;
-  disease: {
+  firstName?: string;
+  lastName?: string;
+  age?: number;
+  address?: string;
+  phoneNumber?: string;
+  gender?: Gender;
+  disease?: {
     name: string;
     description: string;
   };
-  doctorId: Schema.Types.ObjectId;
+  doctorId: PopulatedDoc<Document<Schema.Types.ObjectId> & EmployeeSchema>;
 }

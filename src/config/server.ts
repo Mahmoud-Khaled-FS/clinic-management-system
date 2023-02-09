@@ -6,12 +6,15 @@ import logger from './logger';
 import routers, { ApiRouters } from '../api/routers';
 import ServerError from '../api/util/errors';
 import notFoundMiddleware from '../api/middlewares/404';
+import { Database } from './database';
 
 class Server {
   private app: express.Express;
+  private db: Database = new Database();
 
   constructor() {
     this.app = express();
+    this.db.connect();
     this.setup();
   }
 
