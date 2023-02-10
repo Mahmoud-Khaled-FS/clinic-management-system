@@ -1,66 +1,72 @@
-export type Premission = 'w' | 'r' | 'a' | 'none';
+export enum Permission {
+  NONE = 0,
+  READ = 1,
+  WRITE = 2,
+  ALL = 3,
+}
 
 export type UserRole = 'doctor' | 'admin' | 'manager' | 'employee';
 
-export interface RolePremission {
-  apppointment: Premission;
-  doctors: Premission;
-  patient: Premission;
-  medicine: Premission;
-  clinic: Premission;
-  employee: Premission;
-  prescription: Premission;
-  reports: Premission;
-  invoice: Premission;
-  permissions: Premission;
+export interface RolePermission {
+  apppointment: Permission;
+  doctors: Permission;
+  patient: Permission;
+  medicine: Permission;
+  clinic: Permission;
+  employee: Permission;
+  prescription: Permission;
+  reports: Permission;
+  invoice: Permission;
+  permissions: Permission;
 }
+export type SelectedRolePermission = Partial<RolePermission>;
 
-export const managerDefaultPremission: RolePremission = {
-  apppointment: 'a',
-  doctors: 'a',
-  patient: 'a',
-  medicine: 'a',
-  clinic: 'a',
-  prescription: 'a',
-  employee: 'a',
-  permissions: 'a',
-  reports: 'a',
-  invoice: 'a',
+export const managerDefaultPermission: RolePermission = {
+  apppointment: Permission.ALL,
+  doctors: Permission.ALL,
+  patient: Permission.ALL,
+  medicine: Permission.ALL,
+  clinic: Permission.ALL,
+  prescription: Permission.ALL,
+  employee: Permission.ALL,
+  permissions: Permission.ALL,
+  reports: Permission.ALL,
+  invoice: Permission.ALL,
 };
-export const adminDefaultPremission: RolePremission = {
-  apppointment: 'a',
-  doctors: 'a',
-  patient: 'w',
-  medicine: 'a',
-  clinic: 'a',
-  prescription: 'a',
-  employee: 'a',
-  permissions: 'w',
-  reports: 'a',
-  invoice: 'a',
+export const adminDefaultPermission: RolePermission = {
+  apppointment: Permission.ALL,
+  doctors: Permission.ALL,
+  patient: Permission.WRITE,
+  medicine: Permission.ALL,
+  clinic: Permission.ALL,
+  prescription: Permission.ALL,
+  employee: Permission.ALL,
+  permissions: Permission.WRITE,
+  reports: Permission.ALL,
+  invoice: Permission.ALL,
 };
 
-export const doctorDefaultPremission: RolePremission = {
-  apppointment: 'a',
-  doctors: 'r',
-  patient: 'r',
-  medicine: 'r',
-  clinic: 'r',
-  prescription: 'none',
-  employee: 'none',
-  permissions: 'none',
-  reports: 'none',
-  invoice: 'none',
+export const doctorDefaultPermission: RolePermission = {
+  apppointment: Permission.ALL,
+  doctors: Permission.READ,
+  patient: Permission.READ,
+  medicine: Permission.READ,
+  clinic: Permission.READ,
+  prescription: Permission.NONE,
+  employee: Permission.NONE,
+  permissions: Permission.NONE,
+  reports: Permission.NONE,
+  invoice: Permission.NONE,
 };
-export const employeeDefaultPremission: RolePremission = {
-  apppointment: 'none',
-  doctors: 'r',
-  patient: 'r',
-  medicine: 'r',
-  clinic: 'r',
-  prescription: 'none',
-  employee: 'none',
-  permissions: 'none',
-  reports: 'none',
-  invoice: 'none',
+export const employeeDefaultPermission: RolePermission = {
+  apppointment: Permission.NONE,
+  doctors: Permission.READ,
+  patient: Permission.READ,
+  medicine: Permission.READ,
+  clinic: Permission.READ,
+  prescription: Permission.NONE,
+  employee: Permission.NONE,
+  permissions: Permission.NONE,
+  reports: Permission.NONE,
+  invoice: Permission.NONE,
 };

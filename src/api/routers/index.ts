@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import appointmentRouter from './appointment.router';
+import authRouter from './auth.router';
 import adminRouter from './admin.routers';
 import clinicRouter from './clinic.router';
 import doctorRouter from './doctor.router';
@@ -16,6 +17,7 @@ export class ApiRouters {
 
   constructor() {
     this._router = Router();
+    this.createRouter('auth', authRouter);
     this.createRouter('admin', adminRouter);
     this.createRouter('appointment', appointmentRouter);
     this.createRouter('clinic', clinicRouter);

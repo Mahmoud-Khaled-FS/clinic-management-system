@@ -1,14 +1,14 @@
 import { Document, PopulatedDoc, Schema } from 'mongoose';
 import { Gender } from '../common';
-import { RolePremission, UserRole } from '../permissions';
+import { RolePermission, UserRole } from '../permissions';
 
 interface EmployeeInfo {
   email: string;
   password: string;
   firstName: string;
-  middleName: string;
+  middleName: string | null;
   lastName: string;
-  about: string;
+  about: string | null;
   dateOfBirth: Date;
   gender: Gender;
   address: {
@@ -16,15 +16,15 @@ interface EmployeeInfo {
     zip: number;
     address1: string;
     address2?: string;
-  };
+  } | null;
   employeeType: 'full-time' | 'part-time';
-  hrsPerDay: number;
-  picture: string;
-  phoneNumber: string;
-  salary: number;
-  jopTitle: string;
+  hrsPerDay: number | null;
+  picture: string | null;
+  phoneNumber: string | null;
+  salary: number | null;
+  jopTitle: string | null;
   role: UserRole;
-  premissions: RolePremission;
+  permissions: RolePermission;
 }
 interface NonDoctor extends EmployeeInfo {
   isDoctor: false;
