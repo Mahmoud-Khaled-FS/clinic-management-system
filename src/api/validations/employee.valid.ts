@@ -20,3 +20,5 @@ export const employeeBodyValidation = z.object({
   jopTitle: z.string(),
   role: z.enum(['doctor', 'admin', 'Manager', 'employee']).default('employee'),
 });
+
+export type EmployeeBody = z.infer<typeof employeeBodyValidation>;

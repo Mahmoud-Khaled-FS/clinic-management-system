@@ -3,6 +3,8 @@ import { Gender } from '../common';
 import { RolePremission, UserRole } from '../permissions';
 
 interface EmployeeInfo {
+  email: string;
+  password: string;
   firstName: string;
   middleName: string;
   lastName: string;

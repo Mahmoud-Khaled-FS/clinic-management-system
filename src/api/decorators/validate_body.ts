@@ -12,6 +12,7 @@ export const Validate = (validation: z.ZodObject<any>) => {
         const message = fromZodError(validatedBody.error).message;
         throw new ServerError(message, 400);
       }
+      req.body = validatedBody.data;
       return fn.apply(this, args);
     };
     return descriptor;

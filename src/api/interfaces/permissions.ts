@@ -1,6 +1,6 @@
 export type Premission = 'w' | 'r' | 'a' | 'none';
 
-export type UserRole = 'doctor' | 'admin' | 'Manager' | 'employee';
+export type UserRole = 'doctor' | 'admin' | 'manager' | 'employee';
 
 export interface RolePremission {
   apppointment: Premission;
@@ -15,6 +15,18 @@ export interface RolePremission {
   permissions: Premission;
 }
 
+export const managerDefaultPremission: RolePremission = {
+  apppointment: 'a',
+  doctors: 'a',
+  patient: 'a',
+  medicine: 'a',
+  clinic: 'a',
+  prescription: 'a',
+  employee: 'a',
+  permissions: 'a',
+  reports: 'a',
+  invoice: 'a',
+};
 export const adminDefaultPremission: RolePremission = {
   apppointment: 'a',
   doctors: 'a',

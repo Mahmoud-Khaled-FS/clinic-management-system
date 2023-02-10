@@ -19,6 +19,8 @@ const typePremissions = {
 };
 
 const employeeSchema = new mongoose.Schema<EmployeeSchema>({
+  email: typeString,
+  password: typeString,
   firstName: typeString,
   middleName: typeString,
   lastName: typeString,
@@ -35,6 +37,7 @@ const employeeSchema = new mongoose.Schema<EmployeeSchema>({
       address1: String,
       address2: String,
     },
+    _id: false,
   },
   employeeType: typeString,
   hrsPerDay: Number,
@@ -49,6 +52,7 @@ const employeeSchema = new mongoose.Schema<EmployeeSchema>({
   premissions: {
     type: typePremissions,
     default: employeeDefaultPremission,
+    _id: false,
   },
   isDoctor: Boolean,
   profileId: { type: mongoose.Schema.Types.ObjectId, ref: 'Doctor_Profile' },
