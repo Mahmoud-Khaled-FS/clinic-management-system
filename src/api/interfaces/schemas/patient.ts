@@ -11,7 +11,7 @@ export interface PatientSchema {
   gender?: Gender;
   disease?: {
     name: string;
-    description: string;
+    info: string;
   };
-  doctorId: PopulatedDoc<Document<Schema.Types.ObjectId> & EmployeeSchema>;
+  doctor: PopulatedDoc<Document<Schema.Types.ObjectId> & EmployeeSchema>;
 }

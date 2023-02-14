@@ -8,7 +8,7 @@ export enum Permission {
 export type UserRole = 'doctor' | 'admin' | 'manager' | 'employee';
 
 export interface RolePermission {
-  apppointment: Permission;
+  appointment: Permission;
   doctors: Permission;
   patient: Permission;
   medicine: Permission;
@@ -22,7 +22,7 @@ export interface RolePermission {
 export type SelectedRolePermission = Partial<RolePermission>;
 
 export const managerDefaultPermission: RolePermission = {
-  apppointment: Permission.ALL,
+  appointment: Permission.ALL,
   doctors: Permission.ALL,
   patient: Permission.ALL,
   medicine: Permission.ALL,
@@ -34,7 +34,7 @@ export const managerDefaultPermission: RolePermission = {
   invoice: Permission.ALL,
 };
 export const adminDefaultPermission: RolePermission = {
-  apppointment: Permission.ALL,
+  appointment: Permission.ALL,
   doctors: Permission.ALL,
   patient: Permission.WRITE,
   medicine: Permission.ALL,
@@ -47,7 +47,7 @@ export const adminDefaultPermission: RolePermission = {
 };
 
 export const doctorDefaultPermission: RolePermission = {
-  apppointment: Permission.ALL,
+  appointment: Permission.ALL,
   doctors: Permission.READ,
   patient: Permission.READ,
   medicine: Permission.READ,
@@ -59,7 +59,7 @@ export const doctorDefaultPermission: RolePermission = {
   invoice: Permission.NONE,
 };
 export const employeeDefaultPermission: RolePermission = {
-  apppointment: Permission.NONE,
+  appointment: Permission.NONE,
   doctors: Permission.READ,
   patient: Permission.READ,
   medicine: Permission.READ,

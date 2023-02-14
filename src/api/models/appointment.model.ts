@@ -1,32 +1,29 @@
 import mongoose from 'mongoose';
 import { AppointmentSchema } from '../interfaces/schemas/appointment';
 
-const appointmentSchema = new mongoose.Schema<AppointmentSchema>({
-  date: {
-    type: {
-      day: Number,
-      hour: Number,
-      mounth: Number,
-      year: Number,
-      time: Number,
+const appointmentSchema = new mongoose.Schema<AppointmentSchema>(
+  {
+    date: {
+      type: Date,
+      required: true,
     },
-    required: true,
+    clinic: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Clinic',
+      required: true,
+    },
+    patient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Patient',
+      required: true,
+    },
+    doctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Employee',
+      required: true,
+    },
   },
-  clinicId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Clinic',
-    required: true,
-  },
-  patientId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Patient',
-    required: true,
-  },
-  doctorId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Employee',
-    required: true,
-  },
-});
+  { timestamps: true },
+);
 
 export default mongoose.model('Appointment', appointmentSchema);

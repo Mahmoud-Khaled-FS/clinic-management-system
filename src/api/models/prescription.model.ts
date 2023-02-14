@@ -1,19 +1,21 @@
 import mongoose from 'mongoose';
 import { PrescriptionSchema } from '../interfaces/schemas/prescription';
 
-const patientSchema = new mongoose.Schema<PrescriptionSchema>({
-  medicinesIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicine' }],
-  medicines: [String],
-  doctorId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'Employee',
+const prescriptionSchema = new mongoose.Schema<PrescriptionSchema>(
+  {
+    medicines: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Medicine' }],
+    doctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Employee',
+    },
+    patient: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Patient',
+    },
   },
-  patientId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'Patient',
-  },
-});
+  { timestamps: true },
+);
 
-export default mongoose.model('Patient', patientSchema);
+export default mongoose.model('Prescription', prescriptionSchema);

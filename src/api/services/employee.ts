@@ -1,4 +1,5 @@
-import { UserRole, employeeDefaultPermission, managerDefaultPermission } from '../interfaces/permissions';
+import { getDefaultPermission } from '../helpers/get_default_permission';
+import { UserRole } from '../interfaces/permissions';
 import EmployeeModel from '../models/employee.model';
 import ServerError from '../util/errors';
 import FilterQuery from '../util/filter_sort';
@@ -14,15 +15,12 @@ export default class EmployeeService {
       throw new ServerError('Employee exist with the same email or same name', 400);
     }
     const hashedPassword = await bcrypt.hash('123456', 16);
-    let employeeRole = employeeDefaultPermission;
-    if (role === 'manager') {
-      employeeRole = managerDefaultPermission;
-    }
+    const permissions = getDefaultPermission(role || 'employee');
     const emplyee = new EmployeeModel({
       ...data,
       password: hashedPassword,
       role: role,
-      permissions: employeeRole,
+      permissions: permissions,
       isDoctor: role === 'doctor',
     });
     return emplyee.save();
@@ -54,9 +52,8 @@ export default class EmployeeService {
     return employee;
   }
   static async getAll(page: number = 1, options: any) {
-    const ePerFetch = 10;
-    const skipEmployee = (page - 1) * ePerFetch;
     const optionsMaker = new FilterQuery();
+    const pagination = optionsMaker.pagination(page);
     optionsMaker.sort('firstName', options.sort);
     optionsMaker.startWith('firstName', options.name);
     optionsMaker.startWith('email', options.email);
@@ -65,8 +62,8 @@ export default class EmployeeService {
       { firstName: 1, lastName: 1, _id: 1 },
       optionsMaker.options,
     )
-      .skip(skipEmployee)
-      .limit(ePerFetch);
+      .skip(pagination.skip)
+      .limit(pagination.limit);
     return employees;
   }
 }

@@ -30,7 +30,7 @@ interface NonDoctor extends EmployeeInfo {
   isDoctor: false;
 }
 
-interface Doctor extends EmployeeInfo {
+export interface Doctor extends EmployeeInfo {
   isDoctor: true;
   profileId: PopulatedDoc<Document<Schema.Types.ObjectId> & DoctorProfileSchema>;
 }

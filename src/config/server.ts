@@ -7,10 +7,13 @@ import routers, { ApiRouters } from '../api/routers';
 import ServerError from '../api/util/errors';
 import notFoundMiddleware from '../api/middlewares/404';
 import { Database } from './database';
+import { createServer } from 'http';
+import IoWebSocket from './websocket';
 
 class Server {
   private app: express.Express;
   private db: Database = new Database();
+  public socket = IoWebSocket;
 
   constructor() {
     this.app = express();
@@ -31,7 +34,9 @@ class Server {
   }
 
   launch() {
-    this.app.listen(PORT, () => {
+    const server = createServer(this.app);
+    this.socket.connect(server);
+    server.listen(PORT, () => {
       console.log('  server is running  ');
       logger.info(`http://localhost:${PORT}`);
     });

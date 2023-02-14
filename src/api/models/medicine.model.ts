@@ -8,8 +8,13 @@ const medicineSchema = new mongoose.Schema<MedicineSchema>({
   },
   description: String,
   price: {
-    required: true,
+    default: 0,
     type: Number,
+  },
+  addedBy: {
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Employee',
   },
 });
 

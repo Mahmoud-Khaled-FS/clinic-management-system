@@ -14,10 +14,10 @@ const patientSchema = new mongoose.Schema<PatientSchema>({
   disease: {
     type: {
       name: String,
-      description: String,
+      info: String,
     },
   },
-  doctorId: { required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
+  doctor: { required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
 });
 
 export default mongoose.model('Patient', patientSchema);

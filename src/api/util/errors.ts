@@ -13,11 +13,12 @@ class ServerError extends Error {
 
   static middleware(): ErrorRequestHandler {
     return async (err: ServerError, _, res, __) => {
-      if (!err.code) {
-        err.code = 500;
+      let code = err.code;
+      if (!err.code || !(err instanceof ServerError)) {
+        code = 500;
       }
       logger.error(err.message);
-      res.status(err.code).json({ message: err.message, code: err.code });
+      res.status(code).json({ message: err.message, code: code });
     };
   }
 }

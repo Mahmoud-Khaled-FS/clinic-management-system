@@ -43,3 +43,30 @@ export const editEmployeeAdminBodyValidation = employeeBodyValidation.omit({ rol
 type EmployeeEditAdminBody = z.infer<typeof editEmployeeAdminBodyValidation>;
 
 export type EditEmployeeBody = EmployeeEditAdminBody | EmployeeEditSelfBody;
+
+const dayWorkValid = z
+  .object({
+    startFrom: z.number().min(0).max(24),
+    endAt: z.number().min(0).max(24),
+  })
+  .or(z.null())
+  .default(null);
+
+export const doctorProfileBodyValidation = z.object({
+  specialty: z.string().min(1),
+  timesOfWork: z
+    .object({
+      sunday: dayWorkValid,
+      monday: dayWorkValid,
+      tuesday: dayWorkValid,
+      wednesday: dayWorkValid,
+      thursday: dayWorkValid,
+      friday: dayWorkValid,
+      saturday: dayWorkValid,
+    })
+    .optional(),
+});
+
+export const editDoctorProfileBodyValidation = doctorProfileBodyValidation.partial();
+export type doctorProfileBody = z.infer<typeof doctorProfileBodyValidation>;
+export type editDoctorProfileBody = z.infer<typeof editDoctorProfileBodyValidation>;
